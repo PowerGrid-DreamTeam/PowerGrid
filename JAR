@@ -1,1 +1,105 @@
+import javax.swing.JFrame;
+public class MainCLass {
+	public static void main(String[] args)
+	{
+		JFrame frame = new JFrame("JAR Assignment");
+		frame.getContentPane().addMouseListener(new SquareClickListener());
+		frame.setSize(500, 500);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frame.setVisible(true);
+	}
+}
+///////////////////////////////////////////////////////////////////////////////////////
+import java.awt.Image;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.File;
+import java.util.ArrayList;
 
+public class SquareClickListener extends MouseAdapter {
+	private RectPanel panel;
+	
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		
+		/*if(e.getX() >= 100 && e.getX() <= 300)
+			if(e.getY() >= 100 && e.getY() <= 300)
+			{
+				
+			}*/
+	}
+}
+///////////////////////////////////////////////////////////////////////////////////////
+import java.awt.Color;
+import java.awt.Graphics;
+
+public class Rectangle {
+	private int x;
+	private int y;
+	private int diameter;
+	private Color color;
+	
+	
+	public Rectangle(int x, int y, int diamater, Color color) {
+		super();
+		this.x = x;
+		this.y = y;
+		this.diameter = diamater;
+		this.color = color;
+	}
+
+
+	public int getX() {
+		return x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+
+	public int getDiamater() {
+		return diameter;
+	}
+
+	public Color getColor() {
+		return color;
+	}
+	
+	public void draw(Graphics g)
+	{
+		g.setColor(color);
+		g.fillRect(x, y, diameter, diameter);
+		
+	}
+
+}
+///////////////////////////////////////////////////////////////////////////////////////
+import java.awt.Graphics;
+import java.awt.Image;
+import java.io.File;
+import java.util.LinkedList;
+import java.util.List;
+import javax.swing.JPanel;
+
+public class RectPanel extends JPanel {
+	private List<Rectangle> list = new LinkedList<Rectangle>();
+	
+	public void addRect(Rectangle rect)
+	{
+		list.add(rect);
+	}
+	@Override
+	public void paint(Graphics g) {
+		for(Rectangle rect:list)
+		{
+			rect.draw(g);
+		}
+	}
+	/*public void drawImage(Image img, int x, int y)
+	{
+		Graphics.drawImage(img,
+                 x,  y,
+                ImageObserver observer);
+	}*/
+}
