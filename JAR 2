@@ -1,92 +1,217 @@
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.image.BufferedImage;
-import java.net.URL;
+import java.io.File;
 import java.util.ArrayList;
-import java.applet.*;
 
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
-public class Images extends JPanel implements MouseListener
-{
-	private int x;
-	private int y;
-	String[] images = {"spiral.png", "Spiral2.png", "TheCurrentStateOfArt.png", "yellow.png"};
-	private Image[] stuff = {getImage("/Pictures/spiral.png"), getImage("/Pictures/Spiral2.png")};
+public class MainCLass extends JPanel implements MouseListener {
+	private String[] colors = {"red", "green", "blue", "magenta", "cyan", "yellow", "black", "gray", "dark gray", "light gray", "orange", "pink", "gold", "seagreen", "maroon", "navy"};
+	private int x1 = 200;
+	private int y1 = 200;
+	public Rectangle thing;
+	int j = 0;
+	private String topleft = "";
+	private String topright = "";
+	private String bottomleft = "";
+	private String bottomright = "";
 	
-	public Images()
+	public MainCLass()
 	{
+		thing = new Rectangle();
 		repaint();
-		addMouseListener(this);
-		
 	}
 	
 	public static void main(String[] args)
 	{
-		Images images = new Images();
-		JPanel panel = new Images();
 		JFrame frame = new JFrame("JAR Assignment");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-		frame.setUndecorated(false);
+		MainCLass clas = new MainCLass();
+		frame.getContentPane().addMouseListener(clas);
+		frame.setSize(1000, 1000);
+		frame.add(clas);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setVisible(true);
-		frame.revalidate();
 	}
 	
+	@Override
 	public void paintComponent(Graphics g)
 	{
-		super.paintComponent(g);
-		drawScreen(g);
-	}
-	
-	public void drawScreen(Graphics g)
-	{
-		System.out.println(stuff[0].getWidth(null));
-		g.drawImage(stuff[0] , 0, 0, stuff[0].getWidth(null), stuff[0].getHeight(null), this);
-	}
-	
-	public Image getImage(String path)
-    {
-        Image tempImage = null;
-        try
-        {
-            System.out.println(path);
-            URL imageURL = Images.class.getResource(path);
-            tempImage = Toolkit.getDefaultToolkit().getImage(imageURL);
-        }
-        catch(Exception e)
-        {
-            System.out.println("An error occured - " + e.getMessage());
-        }
-        return tempImage;
-    }
+		if(j == 0)
+		{
+			super.paintComponent(g);
+			this.setBackground(Color.WHITE);
+			
+			g.setColor(Color.BLUE);
+			g.fillRect(200, 200, 200, 200);
+			topleft = "blue";
+			
+			g.setColor(Color.RED);
+			g.fillRect(600, 200, 200, 200);
+			topright = "red";
+			
+			g.setColor(Color.YELLOW);
+			g.fillRect(200, 600, 200, 200);
+			bottomleft = "yellow";
+			
+			g.setColor(Color.GREEN);
+			g.fillRect(600, 600, 200, 200);
+			bottomright = "green";
+			j++;
+		}
+		else
+		{
+			super.paintComponent(g);
 
+			int thing = (int)(Math.random()*16);
+			g = chooseColor(g, colors[thing]);
+			
+			if(x1 == 200)
+			{
+				if(y1 == 200)
+				{
+					g.fillRect(x1, y1, 200, 200);
+					topleft = colors[thing];
+					
+					g = chooseColor(g, topright);
+					g.fillRect(600, 200, 200, 200);
+					
+					g = chooseColor(g, bottomleft);
+					g.fillRect(200, 600, 200, 200);
+					
+					g = chooseColor(g, bottomright);
+					g.fillRect(600, 600, 200, 200);
+				}
+				else if(y1 == 600)
+				{
+					g.fillRect(x1, y1, 200, 200);
+					bottomleft = colors[thing];
+					
+					g = chooseColor(g, topleft);
+					g.fillRect(200, 200, 200, 200);
+					
+					g = chooseColor(g, topright);
+					g.fillRect(600, 200, 200, 200);
+					
+					g = chooseColor(g, bottomright);
+					g.fillRect(600, 600, 200, 200);
+				}
+			}
+			else if(x1 == 600)
+			{
+				if(y1 == 200)
+				{
+					g.fillRect(x1, y1, 200, 200);
+					topright = colors[thing];
+					
+					g = chooseColor(g, topleft);
+					g.fillRect(200, 200, 200, 200);
+					
+					g = chooseColor(g, bottomleft);
+					g.fillRect(200, 600, 200, 200);
+					
+					g = chooseColor(g, bottomright);
+					g.fillRect(600, 600, 200, 200);
+				}
+				else if(y1 == 600)
+				{
+					g.fillRect(x1, y1, 200, 200);
+					bottomright = colors[thing];
+					
+					g = chooseColor(g, topleft);
+					g.fillRect(200, 200, 200, 200);
+					
+					g = chooseColor(g, topright);
+					g.fillRect(600, 200, 200, 200);
+					
+					g = chooseColor(g, bottomleft);
+					g.fillRect(200, 600, 200, 200);
+				}
+			}
+		}
+	}
+	
+	public Graphics chooseColor(Graphics g, String thing)
+	{
+		if(thing.equals("red"))
+			g.setColor(Color.RED);
+		if(thing.equals("green"))
+			g.setColor(Color.GREEN);
+		if(thing.equals("blue"))
+			g.setColor(Color.BLUE);
+		if(thing.equals("magenta"))
+			g.setColor(Color.MAGENTA);
+		if(thing.equals("cyan"))
+			g.setColor(Color.CYAN);
+		if(thing.equals("yellow"))
+			g.setColor(Color.YELLOW);
+		if(thing.equals("black"))
+			g.setColor(Color.BLACK);
+		if(thing.equals("orange"))
+			g.setColor(Color.ORANGE);
+		if(thing.equals("gray"))
+			g.setColor(Color.GRAY);
+		if(thing.equals("dark gray"))
+			g.setColor(Color.DARK_GRAY);
+		if(thing.equals("light gray"))
+			g.setColor(Color.LIGHT_GRAY);
+		if(thing.equals("pink"))
+			g.setColor(Color.PINK);
+		if(thing.equals("gold"))
+			g.setColor(Color.decode("#FFD700"));
+		if(thing.equals("seagreen"))
+			g.setColor(Color.decode("#2E8B57"));
+		if(thing.equals("maroon"))
+			g.setColor(Color.decode("#800000"));
+		if(thing.equals("navy"))
+			g.setColor(Color.decode("#000080"));
+		return g;
+	}
+	
+	
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		if(x >= 100 && x <= 200)
+		int x = e.getX();
+		int y = e.getY();
+		
+		if(x >= 200 && x <= 400)
 		{
-			if(y <= 200)
+			if(y >= 200 && y <= 400)
 			{
+				x1 = 200;
+				y1 = 200;
+				repaint();
 				System.out.println("First square");
 			}
-			else if(y >= 300)
+			else if(y >= 600 && y <= 800)
 			{
+				x1 = 200;
+				y1 = 600;
 				System.out.println("Bottom square");
+				repaint();
 			}
 		}
-		else if(x >= 300 && x <= 400)
+		else if(x >= 600 && x <= 800)
 		{
-			if(y <= 200)
+			if(y >= 200 && y <= 400)
 			{
+				x1 = 600;
+				y1 = 200;
 				System.out.println("Second square");
+				repaint();
 			}
-			else if(y >= 300)
+			else if(y >= 600 && y <= 800)
 			{
+				x1 = 600;
+				y1 = 600;
 				System.out.println("Bottom second square");
+				repaint();
 			}
 		}
-		repaint();
 	}
 
 	@Override
@@ -111,42 +236,5 @@ public class Images extends JPanel implements MouseListener
 	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		
-	}
-}
-///////////////////////////////////////////////////////////////////////////
-import javax.swing.JFrame;
-public class MainCLass {
-	public static void main(String[] args)
-	{
-		JFrame frame = new JFrame("JAR Assignment");
-		frame.getContentPane().addMouseListener(new Images());
-		frame.setSize(500, 500);
-		frame.add(new Rectangle());
-		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		frame.setVisible(true);
-	}
-}
-///////////////////////////////////////////////////////////////////////////////
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
-
-public class Rectangle extends JPanel{
-	public void paintComponent (Graphics g)
-	{
-		super.paintComponent(g);
-		this.setBackground(Color.WHITE);
-		
-		g.setColor(Color.BLUE);
-		g.fillRect(100, 100, 100, 100);
-		
-		g.setColor(Color.RED);
-		g.fillRect(300, 100, 100, 100);
-		
-		g.setColor(Color.YELLOW);
-		g.fillRect(100, 300, 100, 100);
-		
-		g.setColor(Color.GREEN);
-		g.fillRect(300, 300, 100, 100);
 	}
 }
