@@ -1,0 +1,152 @@
+import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
+import java.net.URL;
+import java.util.ArrayList;
+import java.applet.*;
+
+import javax.swing.*;
+
+public class Images extends JPanel implements MouseListener
+{
+	private int x;
+	private int y;
+	String[] images = {"spiral.png", "Spiral2.png", "TheCurrentStateOfArt.png", "yellow.png"};
+	private Image[] stuff = {getImage("/Pictures/spiral.png"), getImage("/Pictures/Spiral2.png")};
+	
+	public Images()
+	{
+		repaint();
+		addMouseListener(this);
+		
+	}
+	
+	public static void main(String[] args)
+	{
+		Images images = new Images();
+		JPanel panel = new Images();
+		JFrame frame = new JFrame("JAR Assignment");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		frame.setUndecorated(false);
+		frame.setVisible(true);
+		frame.revalidate();
+	}
+	
+	public void paintComponent(Graphics g)
+	{
+		super.paintComponent(g);
+		drawScreen(g);
+	}
+	
+	public void drawScreen(Graphics g)
+	{
+		System.out.println(stuff[0].getWidth(null));
+		g.drawImage(stuff[0] , 0, 0, stuff[0].getWidth(null), stuff[0].getHeight(null), this);
+	}
+	
+	public Image getImage(String path)
+    {
+        Image tempImage = null;
+        try
+        {
+            System.out.println(path);
+            URL imageURL = Images.class.getResource(path);
+            tempImage = Toolkit.getDefaultToolkit().getImage(imageURL);
+        }
+        catch(Exception e)
+        {
+            System.out.println("An error occured - " + e.getMessage());
+        }
+        return tempImage;
+    }
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		if(x >= 100 && x <= 200)
+		{
+			if(y <= 200)
+			{
+				System.out.println("First square");
+			}
+			else if(y >= 300)
+			{
+				System.out.println("Bottom square");
+			}
+		}
+		else if(x >= 300 && x <= 400)
+		{
+			if(y <= 200)
+			{
+				System.out.println("Second square");
+			}
+			else if(y >= 300)
+			{
+				System.out.println("Bottom second square");
+			}
+		}
+		repaint();
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+}
+///////////////////////////////////////////////////////////////////////////
+import javax.swing.JFrame;
+public class MainCLass {
+	public static void main(String[] args)
+	{
+		JFrame frame = new JFrame("JAR Assignment");
+		frame.getContentPane().addMouseListener(new Images());
+		frame.setSize(500, 500);
+		frame.add(new Rectangle());
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frame.setVisible(true);
+	}
+}
+///////////////////////////////////////////////////////////////////////////////
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+public class Rectangle extends JPanel{
+	public void paintComponent (Graphics g)
+	{
+		super.paintComponent(g);
+		this.setBackground(Color.WHITE);
+		
+		g.setColor(Color.BLUE);
+		g.fillRect(100, 100, 100, 100);
+		
+		g.setColor(Color.RED);
+		g.fillRect(300, 100, 100, 100);
+		
+		g.setColor(Color.YELLOW);
+		g.fillRect(100, 300, 100, 100);
+		
+		g.setColor(Color.GREEN);
+		g.fillRect(300, 300, 100, 100);
+	}
+}
