@@ -1,1 +1,36 @@
 
+public class Board {
+	
+	ArrayList<Player>player
+	Deck deck
+	WeightedGraph graph
+	TreeMap<String resource, int num>discardResources
+	ArrayList<PowerPlants>market
+	
+	public void play()
+	{
+		
+	}
+	
+	public boolean refillResources()
+	{
+		
+	}
+	
+	public Factory auction()
+	{
+		
+	}
+	
+	public void setOrder()
+	{
+		
+	}
+	
+	public void refreshMarket()
+	{
+		
+	}
+	
+}
+
