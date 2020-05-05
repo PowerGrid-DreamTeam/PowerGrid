@@ -1,1 +1,7 @@
-
+public class PowerGridRunner
+{	
+	public static void main(String[] args)
+	{	
+		new Gamestate().startGame();
+	}
+}
