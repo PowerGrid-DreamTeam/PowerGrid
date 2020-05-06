@@ -1,15 +1,28 @@
 
-public class Board {
+public class Board extends mainBank{
 	
-	ArrayList<Player>player
-	Deck deck
-	WeightedGraph graph
-	TreeMap<String resource, int num>discardResources
-	ArrayList<PowerPlants>market
+	ArrayList<Player>player;
+	WeightedGraph graph;
+	TreeMap<String resource, int num>discardResources; // int is how much of the resource
+	ArrayList<PowerPlant>market;
 	
+	public void createPlayers()
+	{
+		for(int x = 1; x <= 4; x++)
+		{
+			player.add(new player);
+		}
+	}
+	
+	public void discard(Player x, Resource y)
+	{
+		discardResources.add(x.remove(y));
+	}
+
+
 	public void play()
 	{
-		
+		//round of play, houses, resources, call other classes
 	}
 	
 	public boolean refillResources()
@@ -17,9 +30,10 @@ public class Board {
 		
 	}
 	
-	public Factory auction()
+	public PowerPlant auction()
 	{
-		
+		if(market.size() < 8)
+			market.add(mainDeck.remove());
 	}
 	
 	public void setOrder()
@@ -33,4 +47,3 @@ public class Board {
 	}
 	
 }
-
