@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.TreeMap;
 
 public class Board extends mainBank{
 	
@@ -10,7 +13,7 @@ public class Board extends mainBank{
 	{
 		for(int x = 1; x <= 4; x++)
 		{
-			player.add(new player);
+			player.add(new Player);
 		}
 	}
 	
@@ -33,7 +36,10 @@ public class Board extends mainBank{
 	public PowerPlant auction()
 	{
 		if(market.size() < 8)
-			market.add(mainDeck.remove());
+			market.add(mainDeck.removePlant()); // set market
+		Collections.sort(market);
+		
+		
 	}
 	
 	public void setOrder()
