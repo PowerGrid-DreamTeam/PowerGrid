@@ -1,0 +1,99 @@
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+public class FinalThing extends JPanel implements MouseListener{
+	City thing = new City();
+	private int x = 0;
+	private int y = 0;
+	String output = "";
+	private String status = "";
+	
+	public FinalThing() throws IOException
+	{
+		status = "building";
+		initUI();
+		something();
+	}
+	
+	public void getCityStuff()
+	{
+		output = thing.getName();
+		
+	}
+	
+	public static void main(String[] args) throws IOException
+	{
+		JFrame frame = new JFrame("POWERGRID");
+		FinalThing clas = new FinalThing();
+		frame.getContentPane().addMouseListener(clas);
+		frame.setSize(1500, 1000);
+		frame.add(clas);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frame.setVisible(true);
+	}
+	
+	public void something() throws IOException
+	{
+		//Have to hard code this part
+		/*System.out.println("Hello there");
+		Scanner thing = new Scanner(new File("coordinates.txt"));
+		while(thing.hasNextLine())
+		{
+			x=Integer.parseInt(thing.next());
+			y=Integer.parseInt(thing.next());
+			repaint();
+			if(thing.hasNextLine())
+				thing.nextLine();
+		}*/
+	}
+	
+     private void initUI() throws IOException {       
+        
+    	//BufferedImage mainMap = ImageIO.read(FinalThing.class.getResource("c:\\Users\\rutha\\eclipse-workspace\\SubmitPowerGrid\\powerGridMap.jpg"));
+        ImageIcon ii = loadImage();//w ImageIcon(mainMap);
+
+        JLabel label = new JLabel(ii);
+        //label.add(mainMap);
+
+        this.add(label);
+        this.repaint();
+    }
+     private ImageIcon loadImage() {
+
+         ImageIcon ii = new ImageIcon("powerGridMap.jpg");
+         return ii;
+     }
+	
+	@Override
+	public void paintComponent(Graphics g)
+	{
+		//we have to hard code this
+		g.fillOval(157, 143, 25, 25);
+		g.fillOval(233, 123, 25, 25);
+		g.fillOval(197, 334, 25, 25);
+		g.fillOval(159, 411, 25, 25);
+		g.fillOval(277, 534, 25, 25);
+		g.fillOval(282, 418, 25, 25);
+		g.fillOval(286, 337, 25, 25);
+		g.fillOval(309, 262, 25, 25);
+		g.fillOval(387, 246, 25, 25);
+		g.fillOval(394, 321, 25, 25);
+		g.fillOval(387, 388, 25, 25);
+	}
