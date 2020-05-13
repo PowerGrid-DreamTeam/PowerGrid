@@ -24,12 +24,13 @@ public class FinalThing extends JPanel implements MouseListener{
 	private int y = 0;
 	String output = "";
 	private String status = "";
+	private int[] list = new int[]{37, 66, 89, 114};
+	private int p = 0;
 	
 	public FinalThing() throws IOException
 	{
 		status = "building";
-		initUI();
-		something();
+		this.repaint();
 	}
 	
 	public void getCityStuff()
@@ -48,33 +49,6 @@ public class FinalThing extends JPanel implements MouseListener{
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setVisible(true);
 	}
-	
-	public void something() throws IOException
-	{
-		//Have to hard code this part
-		/*System.out.println("Hello there");
-		Scanner thing = new Scanner(new File("coordinates.txt"));
-		while(thing.hasNextLine())
-		{
-			x=Integer.parseInt(thing.next());
-			y=Integer.parseInt(thing.next());
-			repaint();
-			if(thing.hasNextLine())
-				thing.nextLine();
-		}*/
-	}
-	
-     private void initUI() throws IOException {       
-        
-    	//BufferedImage mainMap = ImageIO.read(FinalThing.class.getResource("c:\\Users\\rutha\\eclipse-workspace\\SubmitPowerGrid\\powerGridMap.jpg"));
-        ImageIcon ii = loadImage();//w ImageIcon(mainMap);
-
-        JLabel label = new JLabel(ii);
-        //label.add(mainMap);
-
-        this.add(label);
-        this.repaint();
-    }
      private ImageIcon loadImage() {
 
          ImageIcon ii = new ImageIcon("powerGridMap.jpg");
@@ -84,16 +58,105 @@ public class FinalThing extends JPanel implements MouseListener{
 	@Override
 	public void paintComponent(Graphics g)
 	{
+		super.paintComponent(g);
+		ImageIcon ii = loadImage();
+        g.drawImage(ii.getImage(),0,0,1920,1080,this);
 		//we have to hard code this
-		g.fillOval(157, 143, 25, 25);
-		g.fillOval(233, 123, 25, 25);
-		g.fillOval(197, 334, 25, 25);
-		g.fillOval(159, 411, 25, 25);
-		g.fillOval(277, 534, 25, 25);
-		g.fillOval(282, 418, 25, 25);
-		g.fillOval(286, 337, 25, 25);
-		g.fillOval(309, 262, 25, 25);
-		g.fillOval(387, 246, 25, 25);
-		g.fillOval(394, 321, 25, 25);
-		g.fillOval(387, 388, 25, 25);
+		g.fillOval(477, 511, 50, 50);
+		g.fillOval(478, 450, 50, 50);
+		g.fillOval(462, 388, 50, 50);
+		g.fillOval(492, 322, 50, 50);
+		g.fillOval(569, 394, 50, 50);
+		g.fillOval(627, 435, 50, 50);
+		g.fillOval(578, 503, 50, 50);
+		g.fillOval(702, 545, 50, 50);
+		g.fillOval(742, 490, 50, 50);
+		g.fillOval(750, 449, 50, 50);
+		g.fillOval(787, 391, 50, 50);
+		///////////////////////////////
+		g.fillOval(834, 360, 50, 50);
+		g.fillOval(798, 312, 50, 50);
+		g.fillOval(750, 278, 50, 50);
+		g.fillOval(773, 219, 50, 50);
+		g.fillOval(897, 215, 50, 50);
+		g.fillOval(531, 121, 50, 50);
+		g.fillOval(525, 174, 50, 50);
+		g.fillOval(603, 244, 50, 50);
+		g.fillOval(678, 303, 50, 50);
+		g.fillOval(684, 374, 50, 50);
+		g.fillOval(580, 315, 50, 50);
+		//////////////////////////////
+		g.fillOval(845, 287, 50, 50);
+		g.fillOval(867, 250, 50, 50);
+		//////////////////////////////
+		g.fillOval(459, 139, 50, 50);
+		g.fillOval(272, 163, 50, 50);
+		g.fillOval(339, 247, 50, 50);
+		g.fillOval(328, 290, 50, 50);
+		g.fillOval(138, 198, 50, 50);
+		g.fillOval(40, 87, 50, 50);
+		g.fillOval(150, 369, 50, 50);
+		g.fillOval(75, 414, 50, 50);
+		g.fillOval(290, 391, 50, 50);
+		g.fillOval(201, 434, 50, 50);
+		g.fillOval(110, 453, 50, 50);
+		g.fillOval(14, 332, 50, 50);
+		g.fillOval(8, 142, 50, 50);
+		g.fillOval(201, 278, 50, 50);
+		g.fillOval(467, 258, 50, 50);
+		g.fillOval(682, 429, 50, 50);
+		g.fillOval(755, 588, 50, 50);
+		g.fillOval(684, 228, 50, 50);
+		g.setColor(Color.BLUE);
+		g.fillRect(37, 12, 25, 25);
+		g.setColor(Color.RED);
+		g.fillRect(66, 12, 25, 25);
+		g.setColor(Color.decode("#800080"));
+		g.fillRect(89, 12, 25, 25);
+		g.setColor(Color.decode("#ffffca"));
+		g.fillRect(114, 12, 25, 25);
+		
+		g.setColor(Color.GREEN);
+		g.fillRect(list[p], 37, 25, 10);
 	}
+	
+	
+	
+	
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		int x = e.getX();
+		int y = e.getY();
+		System.out.println(x + "  " + y);
+		
+		p = p++;
+		if(p == 4)
+			p = 0;
+		
+		repaint();
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+}
